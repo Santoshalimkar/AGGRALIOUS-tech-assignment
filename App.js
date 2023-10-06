@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import HomeScreen from "./Screens/HomeScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Notification from "./Screens/Notification";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function HeaderRightButton() {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Ionicons
+      name="notifications"
+      size={24}
+      style={{ marginRight: 2, color: "blue" }}
+      onPress={() => navigation.navigate("Notification")}
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTitle: "c TECH",
+            headerTitleStyle: {
+              color: "black",
+              textAlign: "center",
+            },
+            headerRight: () => <HeaderRightButton />,
+            headerLeft: () => (
+              <Ionicons
+                name="menu"
+                size={24}
+                style={{ marginLeft: 2, marginRight: 4, color: "blue" }}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen name="Notification" component={Notification} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
