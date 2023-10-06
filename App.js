@@ -28,7 +28,7 @@ export default function App() {
           name="Home"
           component={HomeScreen}
           options={{
-            headerTitle: "c TECH",
+            headerTitle: "AGGRALIOUS TECH",
             headerTitleStyle: {
               color: "black",
               textAlign: "center",
